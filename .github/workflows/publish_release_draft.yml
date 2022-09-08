@@ -50,7 +50,7 @@ jobs:
         continue-on-error: true
 
       # Generate changelog, changelog.yml is not triggered by other actions
-      - name: Checkout
+      - name: Checkout master
         uses: actions/checkout@v2
         with:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
@@ -86,6 +86,9 @@ jobs:
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
         run: TAGCONTENT="${{ steps.changelog.outputs.changelog }}";CHANGELOG=$(cat CHANGELOG.md);CHANGELOG=$(echo "$CHANGELOG" | sed -e "s/# Changelog//");echo -e "# Changelog\n\n$TAGCONTENT$CHANGELOG" > CHANGELOG.md
 
+      - name: Checkout changelog branch
+        uses: actions/checkout@v2
+
       - name: Commit Updated Changelog
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -104,6 +107,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
+          MERGE_DELETE_BRANCH: true
 
       # Remove the release or hotfix branch after publishing
       - name: Remove PR branch
