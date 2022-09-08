@@ -104,6 +104,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: ${{ steps.payload_info.outputs.pull_request.base.ref }}
+          branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Approve PR
         uses: hmarr/auto-approve-action@v2
