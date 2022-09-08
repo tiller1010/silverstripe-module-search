@@ -64,18 +64,6 @@ jobs:
         with:
           base: ${{ steps.payload_info.outputs.pull_request.base.ref }}
 
-      - name: Approve PR
-        uses: hmarr/auto-approve-action@v2
-        with:
-          review-message: "Auto approved automated PR"
-          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
-
-      - name: Auto merge
-        uses: pascalgn/automerge-action@v0.15.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
-
       # Check if this is a support branch
       - name: Check For support branch
         id: is_support_branch
@@ -104,6 +92,18 @@ jobs:
         with:
           commit_message: Updated CHANGELOG.md
           branch: ${{ steps.payload_info.outputs.pull_request.base.ref }}
+
+      - name: Approve PR
+        uses: hmarr/auto-approve-action@v2
+        with:
+          review-message: "Auto approved automated PR"
+          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+
+      - name: Auto merge
+        uses: pascalgn/automerge-action@v0.15.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
 
       # Remove the release or hotfix branch after publishing
       - name: Remove PR branch
