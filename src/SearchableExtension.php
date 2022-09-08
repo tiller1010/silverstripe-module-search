@@ -216,6 +216,7 @@ class SearchableExtension extends DataExtension
   public function requireDefaultRecords()
   {
     // Test comment
+    // Test comment
       parent::requireDefaultRecords();
 
       if (!file_exists(dirname(__DIR__, 4).'/search')) {
