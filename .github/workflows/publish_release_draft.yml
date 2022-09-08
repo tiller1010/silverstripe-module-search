@@ -103,7 +103,7 @@ jobs:
         id: create_pr
         uses: peter-evans/create-pull-request@v4
         with:
-          base: ${{ steps.payload_info.outputs.pull_request.base.ref }}
+          base: master
           branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Approve PR
