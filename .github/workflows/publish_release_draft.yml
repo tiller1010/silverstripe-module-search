@@ -97,7 +97,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Updated CHANGELOG.md
-          branch: changelog/${{ steps.get_release_id.outputs.release_id }}
+          # branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Create Pull Request
         id: create_pr
