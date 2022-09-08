@@ -54,8 +54,27 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
+          # ref: changelog/${{ steps.get_release_id.outputs.release_id }}
           fetch-depth: 0
           # token: ${{ env.GH_TOKEN }}
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          base: ${{ steps.payload_info.outputs.pull_request.base.ref }}
+
+      - name: Approve PR
+        uses: hmarr/auto-approve-action@v2
+        with:
+          review-message: "Auto approved automated PR"
+          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+
+      - name: Auto merge
+        uses: pascalgn/automerge-action@v0.15.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
 
       # Check if this is a support branch
       - name: Check For support branch
