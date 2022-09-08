@@ -26,7 +26,7 @@ jobs:
         id: get_release_id
         run: |
           TOKEN=${{ secrets.GITHUB_TOKEN }}
-          RELEASEID=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token $TOKEN" https://api.github.com/repos/werkbot/silverstripe-module-search/releases)
+          RELEASEID=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token $TOKEN" https://api.github.com/repos/tiller1010/silverstripe-module-search/releases)
           RELEASEID=$(echo "$RELEASEID" | grep \"id\"  | head -n 1 | sed -re "s/[a-z]*//g;s/[-|,|:|'\"]//g;s/\s//g")
           echo "::set-output name=release_id::$RELEASEID"
         env:
