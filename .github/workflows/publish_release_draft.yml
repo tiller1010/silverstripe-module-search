@@ -20,7 +20,9 @@ jobs:
         if: env.GH_TOKEN == ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+        run: |
+          git config --global url.ssh://git@github.com/
+          echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
 
       - name: Get release id
         id: get_release_id
