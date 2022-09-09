@@ -12,4 +12,4 @@ jobs:
         with:
           mode: exactly
           count: 1
-          labels: "patch, minor, major"
+          labels: "chore, patch, minor, major"
