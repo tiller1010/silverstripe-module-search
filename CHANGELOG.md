@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.15 - 2022-09-09
+## 🐛 Bugfixes
+- change
+
+
+
 ## 1.0.3 - 2022-07-20
 ## 🎉 New Features
 - Added automatic draft release and changelog updater ([#12](https://github.com/werkbot/silverstripe-module-search/pull/12) by [tiller1010](https://github.com/tiller1010))
