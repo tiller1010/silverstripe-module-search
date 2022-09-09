@@ -105,7 +105,7 @@ jobs:
         with:
           base: master
           commit-message: Updated CHANGELOG.md
-          labels: chore
+          labels: automerge
           # branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Approve PR
