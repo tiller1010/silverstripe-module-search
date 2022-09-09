@@ -15,8 +15,6 @@ jobs:
   publish_release:
     if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       # - name: GH_TOKEN
       #   if: env.GH_TOKEN == ''
