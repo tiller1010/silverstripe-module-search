@@ -112,7 +112,7 @@ jobs:
         with:
           review-message: "Auto approved automated PR"
           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.SOME_USERS_PAT }}
 
       - name: Auto merge
         uses: pascalgn/automerge-action@v0.15.3
@@ -125,5 +125,5 @@ jobs:
       - name: Remove PR branch
         uses: dawidd6/action-delete-branch@v3
         with:
-          github_token: ${{github.token}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: ${{ steps.payload_info.outputs.branch }}
