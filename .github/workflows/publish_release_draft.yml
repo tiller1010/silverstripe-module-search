@@ -70,6 +70,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: master
+          title: Auto-Update CHANGELOG.md
           commit-message: Updated CHANGELOG.md
           labels: automerge
 
@@ -86,6 +87,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
           MERGE_DELETE_BRANCH: true
+
+      - name: Merge master -> develop
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: master
+          target_branch: develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Merged master into develop
 
       # Remove the release or hotfix branch after publishing
       - name: Remove PR branch
