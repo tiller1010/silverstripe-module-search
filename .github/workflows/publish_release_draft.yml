@@ -66,17 +66,17 @@ jobs:
           FILTEREDBRANCHNAME=$(git branch | grep "\* support")
           echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
 
-      - name: Create changelog branch
-        uses: peterjgrainger/action-create-branch@v2.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: changelog/${{ steps.get_release_id.outputs.release_id }}
+      # - name: Create changelog branch
+      #   uses: peterjgrainger/action-create-branch@v2.2.0
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
-      - name: Checkout changelog branch
-        uses: actions/checkout@v2
-        with:
-          ref: changelog/${{ steps.get_release_id.outputs.release_id }}
+      # - name: Checkout changelog branch
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Generate Changelog
         id: changelog
@@ -92,11 +92,11 @@ jobs:
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
         run: TAGCONTENT="${{ steps.changelog.outputs.changelog }}";CHANGELOG=$(cat CHANGELOG.md);CHANGELOG=$(echo "$CHANGELOG" | sed -e "s/# Changelog//");echo -e "# Changelog\n\n$TAGCONTENT$CHANGELOG" > CHANGELOG.md
 
-      - name: Commit Updated Changelog
-        if: steps.is_support_branch.outputs.filtered_branch_name == ''
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Updated CHANGELOG.md
+      # - name: Commit Updated Changelog
+      #   if: steps.is_support_branch.outputs.filtered_branch_name == ''
+      #   uses: stefanzweifel/git-auto-commit-action@v4
+      #   with:
+      #     commit_message: Updated CHANGELOG.md
           # branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Create Pull Request
@@ -104,7 +104,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: master
-          branch: changelog/${{ steps.get_release_id.outputs.release_id }}
+          commit-message: Updated CHANGELOG.md
+          # branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Approve PR
         uses: hmarr/auto-approve-action@v2
