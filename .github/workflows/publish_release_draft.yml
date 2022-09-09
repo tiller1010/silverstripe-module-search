@@ -8,24 +8,11 @@ on:
       - master
       - support/*
 
-# env:
-#   GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
 jobs:
   publish_release:
     if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     steps:
-      # - name: GH_TOKEN
-      #   if: env.GH_TOKEN == ''
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
-
-      # - name: Set to SSH mode
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
 
       - name: Get release id
         id: get_release_id
@@ -54,9 +41,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
-          # ref: changelog/${{ steps.get_release_id.outputs.release_id }}
           fetch-depth: 0
-          # token: ${{ env.GH_TOKEN }}
 
       # Check if this is a support branch
       - name: Check For support branch
@@ -65,18 +50,6 @@ jobs:
         run: |
           FILTEREDBRANCHNAME=$(git branch | grep "\* support")
           echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
-
-      # - name: Create changelog branch
-      #   uses: peterjgrainger/action-create-branch@v2.2.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     branch: changelog/${{ steps.get_release_id.outputs.release_id }}
-
-      # - name: Checkout changelog branch
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Generate Changelog
         id: changelog
@@ -92,13 +65,6 @@ jobs:
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
         run: TAGCONTENT="${{ steps.changelog.outputs.changelog }}";CHANGELOG=$(cat CHANGELOG.md);CHANGELOG=$(echo "$CHANGELOG" | sed -e "s/# Changelog//");echo -e "# Changelog\n\n$TAGCONTENT$CHANGELOG" > CHANGELOG.md
 
-      # - name: Commit Updated Changelog
-      #   if: steps.is_support_branch.outputs.filtered_branch_name == ''
-      #   uses: stefanzweifel/git-auto-commit-action@v4
-      #   with:
-      #     commit_message: Updated CHANGELOG.md
-          # branch: changelog/${{ steps.get_release_id.outputs.release_id }}
-
       - name: Create Pull Request
         id: create_pr
         uses: peter-evans/create-pull-request@v4
@@ -106,7 +72,6 @@ jobs:
           base: master
           commit-message: Updated CHANGELOG.md
           labels: automerge
-          # branch: changelog/${{ steps.get_release_id.outputs.release_id }}
 
       - name: Approve PR
         uses: hmarr/auto-approve-action@v2
