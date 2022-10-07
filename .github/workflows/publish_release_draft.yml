@@ -77,7 +77,7 @@ jobs:
       - name: Approve PR
         uses: hmarr/auto-approve-action@v2
         with:
-          review-message: "Auto approved automated PR"
+          review-message: Auto approved automated PR
           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
           github-token: ${{ secrets.SOME_USERS_PAT }}
 

@@ -1,5 +1,7 @@
 # Changelog
 
+## FORK RELEASES
+
 ## 2.0.22 - 2022-09-09
 ## 🐛 Bugfixes
 - change
@@ -28,6 +30,19 @@
 ## 🐛 Bugfixes
 - change
 
+## END FORK RELEASES
+
+
+## WERKBOT RELEASES !! NOT AVAILABLE ON THIS REPO !!
+## 1.1.0 - 2022-09-21
+## 🎉 New Features
+- Added search modal ([#16](https://github.com/werkbot/silverstripe-module-search/pull/16) by [tiller1010](https://github.com/tiller1010))
+
+## 🐛 Bugfixes
+- proper insert and update index columns ([#18](https://github.com/werkbot/silverstripe-module-search/pull/18) by [tiller1010](https://github.com/tiller1010))
+
+## 🏗️ Build System
+- auto approved PR
 
 
 ## 1.0.3 - 2022-07-20
