@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.23 - 2022-11-23
+## 🎉 New Features
+- Added search modal ([#16](https://github.com/tiller1010/silverstripe-module-search/pull/16) by [tiller1010](https://github.com/tiller1010))
+
+## 🐛 Bugfixes
+- proper insert and update index columns ([#18](https://github.com/tiller1010/silverstripe-module-search/pull/18) by [tiller1010](https://github.com/tiller1010))
+
+## 🔨 Improvements
+- adjusted support releases ([#33](https://github.com/tiller1010/silverstripe-module-search/pull/33) by [tiller1010](https://github.com/tiller1010))
+
+## 🏗️ Build System
+- auto approved PR
+
+
+
 ## FORK RELEASES
 
 ## 2.0.22 - 2022-09-09
