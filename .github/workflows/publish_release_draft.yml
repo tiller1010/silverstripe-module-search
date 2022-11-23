@@ -36,8 +36,8 @@ jobs:
         uses: Dovyski/payload-info-action@master
         continue-on-error: true
 
-      # Generate changelog, changelog.yml is not triggered by other actions
-      - name: Checkout master
+      # Generate changelog
+      - name: Checkout base
         uses: actions/checkout@v2
         with:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
@@ -53,7 +53,6 @@ jobs:
 
       - name: Generate Changelog
         id: changelog
-        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: loopwerk/tag-changelog@v1.0.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -69,7 +68,6 @@ jobs:
         id: create_pr
         uses: peter-evans/create-pull-request@v4
         with:
-          base: master
           title: Auto-Update CHANGELOG.md
           commit-message: Updated CHANGELOG.md
           labels: automerge
@@ -88,14 +86,13 @@ jobs:
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
           MERGE_DELETE_BRANCH: true
 
-      - name: Merge master -> develop
+      - name: Merge master/support -> develop
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: master
           target_branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: Merged master into develop
+          message: Merged master/support into develop
 
       # Remove the release or hotfix branch after publishing
       - name: Remove PR branch
