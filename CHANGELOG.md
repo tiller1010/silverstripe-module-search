@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.23 - 2022-11-23
+## 🎉 New Features
+- Added search modal ([#16](https://github.com/tiller1010/silverstripe-module-search/pull/16) by [tiller1010](https://github.com/tiller1010))
+
+## 🐛 Bugfixes
+- proper insert and update index columns ([#18](https://github.com/tiller1010/silverstripe-module-search/pull/18) by [tiller1010](https://github.com/tiller1010))
+
+## 🔨 Improvements
+- adjusted support releases ([#33](https://github.com/tiller1010/silverstripe-module-search/pull/33) by [tiller1010](https://github.com/tiller1010))
+
+## 🏗️ Build System
+- auto approved PR
+
+
+
 ## [1.0.01](https://github.com/werkbot/silverstripe-module-search/tree/1.0.01) (2022-04-08)
 
 [Full Changelog](https://github.com/werkbot/silverstripe-module-search/compare/1.0.0...1.0.01)
