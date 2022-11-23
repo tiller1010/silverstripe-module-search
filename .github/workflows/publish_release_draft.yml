@@ -43,14 +43,6 @@ jobs:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
           fetch-depth: 0
 
-      # Check if this is a support branch
-      - name: Check For support branch
-        id: is_support_branch
-        continue-on-error: true
-        run: |
-          FILTEREDBRANCHNAME=$(git branch | grep "\* support")
-          echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
-
       - name: Generate Changelog
         id: changelog
         uses: loopwerk/tag-changelog@v1.0.4
@@ -61,7 +53,6 @@ jobs:
 
       - name: Output Changelog
         id: output_changelog
-        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         run: TAGCONTENT="${{ steps.changelog.outputs.changelog }}";CHANGELOG=$(cat CHANGELOG.md);CHANGELOG=$(echo "$CHANGELOG" | sed -e "s/# Changelog//");echo -e "# Changelog\n\n$TAGCONTENT$CHANGELOG" > CHANGELOG.md
 
       - name: Create Pull Request
