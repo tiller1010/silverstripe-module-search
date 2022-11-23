@@ -75,22 +75,3 @@ jobs:
           tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-      # RELEASE BRANCHING (NOT GIT-FLOW)
-      # Get the last tag created on this branch
-      - name: Get Last Tag
-        id: last_tag
-        run: |
-          LASTTAG=$(git describe --tags | sed -re "s/-.+//")
-          echo "::set-output name=last_tag_on_branch::$LASTTAG"
-
-      # Draft Release with Previous Tag
-      - name: Draft Release with Previous Tag
-        id: update_release_draft
-        if: steps.is_release_branch.outputs.filtered_branch_name == '' && steps.is_hotfix_branch.outputs.filtered_branch_name == ''
-        uses: tiller1010/release-drafter@master
-        with:
-          last_tag: ${{ steps.last_tag.outputs.last_tag_on_branch }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
