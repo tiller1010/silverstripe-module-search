@@ -22,6 +22,7 @@ class SearchableExtension extends DataExtension
   ];
 
   // TEST CHANGE
+  // ANOTHER TEST CHANGE
 
   /**
    * getIndexQuery
