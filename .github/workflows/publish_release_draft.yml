@@ -1,0 +1,102 @@
+name: Publish draft release when release branch is merged
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+      - support/*
+
+jobs:
+  publish_release:
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Get release id
+        id: get_release_id
+        run: |
+          TOKEN=${{ secrets.GITHUB_TOKEN }}
+          RELEASEID=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token $TOKEN" https://api.github.com/repos/tiller1010/silverstripe-module-search/releases)
+          RELEASEID=$(echo "$RELEASEID" | grep \"id\"  | head -n 1 | sed -re "s/[a-z]*//g;s/[-|,|:|'\"]//g;s/\s//g")
+          echo "::set-output name=release_id::$RELEASEID"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.get_release_id.outputs.release_id }}
+
+      - name: Payload info
+        id: payload_info
+        uses: Dovyski/payload-info-action@master
+        continue-on-error: true
+
+      # Generate changelog
+      - name: Checkout base
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
+          fetch-depth: 0
+
+      # Check if this is a support branch
+      - name: Check For support branch
+        id: is_support_branch
+        continue-on-error: true
+        run: |
+          FILTEREDBRANCHNAME=$(git branch | grep "\* support")
+          echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
+
+      - name: Generate Changelog
+        id: changelog
+        uses: loopwerk/tag-changelog@v1.0.4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude_types: other,doc,chore
+          config_file: .github/tag-changelog-config.js
+
+      - name: Output Changelog
+        id: output_changelog
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
+        run: TAGCONTENT="${{ steps.changelog.outputs.changelog }}";CHANGELOG=$(cat CHANGELOG.md);CHANGELOG=$(echo "$CHANGELOG" | sed -e "s/# Changelog//");echo -e "# Changelog\n\n$TAGCONTENT$CHANGELOG" > CHANGELOG.md
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          title: Auto-Update CHANGELOG.md
+          commit-message: Updated CHANGELOG.md
+          labels: automerge
+
+      - name: Approve PR
+        uses: hmarr/auto-approve-action@v2
+        with:
+          review-message: Auto approved automated PR
+          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+          github-token: ${{ secrets.SOME_USERS_PAT }}
+
+      - name: Auto merge
+        uses: pascalgn/automerge-action@v0.15.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
+          MERGE_DELETE_BRANCH: true
+
+      - name: Merge master/support -> develop
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Merged master/support into develop
+
+      # Remove the release or hotfix branch after publishing
+      - name: Remove PR branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branches: ${{ steps.payload_info.outputs.branch }}
