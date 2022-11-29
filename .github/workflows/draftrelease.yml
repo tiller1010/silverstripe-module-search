@@ -70,8 +70,9 @@ jobs:
       - name: Payload info
         id: payload_info
         if: steps.is_hotfix_branch.outputs.filtered_branch_name != ''
-        uses: Dovyski/payload-info-action@master
-        continue-on-error: true
+        run: |
+          BRANCHNAME=$(git branch | grep \* | sed -re "s/\*//;s/\s*//g")
+          echo "::set-output name=branch::$BRANCHNAME"
 
       # Draft Release with hotfix branch
       - name: Draft Release with hotfix branch
@@ -80,6 +81,6 @@ jobs:
         uses: tiller1010/release-drafter@master
         with:
           tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
-          commitish: "${{ steps.payload_info.outputs.branch }}"
+          commitish: ${{ steps.payload_info.outputs.branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
