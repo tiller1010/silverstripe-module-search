@@ -81,6 +81,6 @@ jobs:
         uses: tiller1010/release-drafter@master
         with:
           tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
-          commitish: ${{ steps.hotfix_branch.outputs.branch }}
+          commitish: support/1.x
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
