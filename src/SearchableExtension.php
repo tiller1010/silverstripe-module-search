@@ -20,6 +20,10 @@ class SearchableExtension extends DataExtension
     "getSearchableTitle" => "Text",
     "getSearchableSummary" => 'HTMLText',
   ];
+
+  // TEST CHANGE
+  // ANOTHER TEST CHANGE
+
   /**
    * getIndexQuery
    * This query is used when building the index

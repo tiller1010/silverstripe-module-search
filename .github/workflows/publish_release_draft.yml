@@ -46,13 +46,16 @@ jobs:
       # Check if this is a support branch
       - name: Check For support branch
         id: is_support_branch
+        if: steps.is_release_branch.outputs.filtered_branch_name == ''
         continue-on-error: true
         run: |
           FILTEREDBRANCHNAME=$(git branch | grep "\* support")
           echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
 
+      # START CHANGELOG PORTION
       - name: Generate Changelog
         id: changelog
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: loopwerk/tag-changelog@v1.0.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -66,6 +69,7 @@ jobs:
 
       - name: Create Pull Request
         id: create_pr
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: peter-evans/create-pull-request@v4
         with:
           title: Auto-Update CHANGELOG.md
@@ -73,6 +77,7 @@ jobs:
           labels: automerge
 
       - name: Approve PR
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: hmarr/auto-approve-action@v2
         with:
           review-message: Auto approved automated PR
@@ -80,11 +85,14 @@ jobs:
           github-token: ${{ secrets.SOME_USERS_PAT }}
 
       - name: Auto merge
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: pascalgn/automerge-action@v0.15.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
           MERGE_DELETE_BRANCH: true
+
+      # END CHANGELOG PORTION
 
       - name: Merge master/support -> develop
         uses: devmasx/merge-branch@master
