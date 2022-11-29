@@ -43,8 +43,18 @@ jobs:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
           fetch-depth: 0
 
+      # Check if this is a support branch
+      - name: Check For support branch
+        id: is_support_branch
+        if: steps.is_release_branch.outputs.filtered_branch_name == ''
+        continue-on-error: true
+        run: |
+          FILTEREDBRANCHNAME=$(git branch | grep "\* support")
+          echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
+
       - name: Generate Changelog
         id: changelog
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: loopwerk/tag-changelog@v1.0.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -53,10 +63,12 @@ jobs:
 
       - name: Output Changelog
         id: output_changelog
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         run: TAGCONTENT="${{ steps.changelog.outputs.changelog }}";CHANGELOG=$(cat CHANGELOG.md);CHANGELOG=$(echo "$CHANGELOG" | sed -e "s/# Changelog//");echo -e "# Changelog\n\n$TAGCONTENT$CHANGELOG" > CHANGELOG.md
 
       - name: Create Pull Request
         id: create_pr
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: peter-evans/create-pull-request@v4
         with:
           title: Auto-Update CHANGELOG.md
@@ -64,6 +76,7 @@ jobs:
           labels: automerge
 
       - name: Approve PR
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: hmarr/auto-approve-action@v2
         with:
           review-message: Auto approved automated PR
@@ -71,6 +84,7 @@ jobs:
           github-token: ${{ secrets.SOME_USERS_PAT }}
 
       - name: Auto merge
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: pascalgn/automerge-action@v0.15.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
