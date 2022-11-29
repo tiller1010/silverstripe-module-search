@@ -66,9 +66,9 @@ jobs:
           RELEASETAG=$(git branch | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
           echo "::set-output name=release_tag::$RELEASETAG"
 
-      # Get hotfix push data
-      - name: Payload info
-        id: payload_info
+      # Get hotfix data
+      - name: Hotfix data
+        id: hotfix_branch
         if: steps.is_hotfix_branch.outputs.filtered_branch_name != ''
         run: |
           BRANCHNAME=$(git branch | grep \* | sed -re "s/\*//;s/\s*//g")
@@ -81,6 +81,6 @@ jobs:
         uses: tiller1010/release-drafter@master
         with:
           tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
-          commitish: ${{ steps.payload_info.outputs.branch }}
+          commitish: ${{ steps.hotfix_branch.outputs.branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
