@@ -80,6 +80,6 @@ jobs:
         uses: tiller1010/release-drafter@master
         with:
           tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
-          commitish: ${{ steps.payload_info.outputs.push.branch }}
+          commitish: ${{ steps.payload_info.outputs.branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

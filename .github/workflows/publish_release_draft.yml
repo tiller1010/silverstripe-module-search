@@ -52,6 +52,7 @@ jobs:
           FILTEREDBRANCHNAME=$(git branch | grep "\* support")
           echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
 
+      # START CHANGELOG PORTION
       - name: Generate Changelog
         id: changelog
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
@@ -90,6 +91,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
           MERGE_DELETE_BRANCH: true
+
+      # END CHANGELOG PORTION
 
       - name: Merge master/support -> develop
         uses: devmasx/merge-branch@master
