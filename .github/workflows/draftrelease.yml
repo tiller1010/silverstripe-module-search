@@ -66,13 +66,12 @@ jobs:
           RELEASETAG=$(git branch | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
           echo "::set-output name=release_tag::$RELEASETAG"
 
-      # Get hotfix data
-      - name: Hotfix data
-        id: hotfix_branch
-        if: steps.is_hotfix_branch.outputs.filtered_branch_name != ''
+      # Get the last tag created on this branch
+      - name: Get Last Tag
+        id: last_tag
         run: |
-          BRANCHNAME=$(git branch | grep \* | sed -re "s/\*//;s/\s*//g")
-          echo "::set-output name=branch::$BRANCHNAME"
+          LASTTAG=$(git describe --tags | sed -re "s/-.+//")
+          echo "::set-output name=last_tag_on_branch::$LASTTAG"
 
       # Draft Release with hotfix branch
       - name: Draft Release with hotfix branch
@@ -81,6 +80,6 @@ jobs:
         uses: tiller1010/release-drafter@master
         with:
           tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
-          commitish: support/1.x
+          commitish: ${{ steps.last_tag.last_tag_on_branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
