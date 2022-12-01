@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.24 - 2022-12-01
+## 🎉 New Features
+- new test feat
+- newer test feat
+
+## 🔨 Improvements
+- support change
+- support change
+- no changelog on support branch, use commitish input for release notes
+- fixed input
+- fixed input
+- fixed input
+
+
+
 ## 2.0.23 - 2022-11-23
 ## 🎉 New Features
 - Added search modal ([#16](https://github.com/tiller1010/silverstripe-module-search/pull/16) by [tiller1010](https://github.com/tiller1010))
