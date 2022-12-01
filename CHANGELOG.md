@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.24 - 2022-11-29
+## 2.0.24 - 2022-12-01
 ## 🎉 New Features
 - new test feat
 - newer test feat
