@@ -24,6 +24,47 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Payload info
+        id: payload_info
+        uses: Dovyski/payload-info-action@master
+        continue-on-error: true
+
+      # Check if this is a support branch
+      - name: Check For support branch
+        id: is_support_branch
+        continue-on-error: true
+        run: |
+          FILTEREDBRANCHNAME=$(git branch | grep "\* support")
+          echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
+
+      # Get the hotfix tag
+      - name: Get hotfix Tag
+        id: get_hotfix_tag
+        if: steps.is_support_branch.outputs.filtered_branch_name != ''
+        run: |
+          HOTFIXBRANCH=${{ steps.payload_info.outputs.branch }}
+          RELEASETAG=$(echo "$HOTFIXBRANCH" | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
+          echo "::set-output name=release_tag::$RELEASETAG"
+
+      # Get the last tag created on this branch
+      - name: Get Last Tag
+        id: last_tag
+        if: steps.is_support_branch.outputs.filtered_branch_name != ''
+        run: |
+          LASTTAG=$(git describe --tags | sed -re "s/-.+//")
+          echo "::set-output name=last_tag_on_branch::$LASTTAG"
+
+      # Draft Release with hotfix branch
+      - name: Draft Release with hotfix branch
+        id: update_release_draft_with_hotfix_branch
+        if: steps.is_support_branch.outputs.filtered_branch_name != ''
+        uses: tiller1010/release-drafter@master
+        with:
+          tag: ${{ steps.get_hotfix_tag.outputs.release_tag }}
+          last_tag: ${{ steps.last_tag.outputs.last_tag_on_branch }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish release
         uses: eregon/publish-release@v1
         env:
@@ -31,26 +72,12 @@ jobs:
         with:
           release_id: ${{ steps.get_release_id.outputs.release_id }}
 
-      - name: Payload info
-        id: payload_info
-        uses: Dovyski/payload-info-action@master
-        continue-on-error: true
-
       # Generate changelog
       - name: Checkout base
         uses: actions/checkout@v2
         with:
           ref: ${{ steps.payload_info.outputs.pull_request.base.ref }}
           fetch-depth: 0
-
-      # Check if this is a support branch
-      - name: Check For support branch
-        id: is_support_branch
-        if: steps.is_release_branch.outputs.filtered_branch_name == ''
-        continue-on-error: true
-        run: |
-          FILTEREDBRANCHNAME=$(git branch | grep "\* support")
-          echo "::set-output name=filtered_branch_name::$FILTEREDBRANCHNAME"
 
       # START CHANGELOG PORTION
       - name: Generate Changelog
