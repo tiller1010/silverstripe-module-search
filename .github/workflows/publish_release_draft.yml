@@ -24,7 +24,7 @@ jobs:
         run: |
           TOKEN=${{ secrets.GITHUB_TOKEN }}
           RELEASEID=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token $TOKEN" https://api.github.com/repos/tiller1010/silverstripe-module-search/releases)
-          RELEASEID=$(echo "$RELEASEID" | grep \"id\"  | head -n 1 | sed -re "s/[a-z]*//g;s/[-|,|:|'\"]//g;s/\s//g")
+          RELEASEID=$(echo "$RELEASEID" | grep \"id\"  | head -n 1 | sed -re "s/[a-z]*//g;s/[-|,|:|'\"]//g;s/\s//g") > /dev/null
           echo "release_id=$RELEASEID" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +39,7 @@ jobs:
         id: is_support_branch
         continue-on-error: true
         run: |
-          FILTEREDBRANCHNAME=$(git branch | grep "\* support")
+          FILTEREDBRANCHNAME=$(git branch | grep "\* support") > /dev/null
           echo "filtered_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
 
       # Get the hotfix tag
@@ -48,7 +48,7 @@ jobs:
         if: steps.is_support_branch.outputs.filtered_branch_name != ''
         run: |
           HOTFIXBRANCH=${{ steps.payload_info.outputs.branch }}
-          RELEASETAG=$(echo "$HOTFIXBRANCH" | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
+          RELEASETAG=$(echo "$HOTFIXBRANCH" | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g") > /dev/null
           echo "release_tag=$RELEASETAG" >> $GITHUB_OUTPUT
 
       # Get the last tag created on this branch

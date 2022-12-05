@@ -26,7 +26,7 @@ jobs:
         id: is_release_branch
         continue-on-error: true
         run: |
-          FILTEREDBRANCHNAME=$(git branch | grep "\* release")
+          FILTEREDBRANCHNAME=$(git branch | grep "\* release") > /dev/null
           echo "filtered_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
 
       # Get the release tag
@@ -34,7 +34,7 @@ jobs:
         id: get_release_tag
         if: steps.is_release_branch.outputs.filtered_branch_name != ''
         run: |
-          RELEASETAG=$(git branch | grep \* | sed -re "s/release\///;s/\*//;s/\s*//g")
+          RELEASETAG=$(git branch | grep \* | sed -re "s/release\///;s/\*//;s/\s*//g") > /dev/null
           echo "release_tag=$RELEASETAG" >> $GITHUB_OUTPUT
 
       # Draft Release with release branch
@@ -55,7 +55,7 @@ jobs:
         if: steps.is_release_branch.outputs.filtered_branch_name == ''
         continue-on-error: true
         run: |
-          FILTEREDBRANCHNAME=$(git branch | grep "\* hotfix")
+          FILTEREDBRANCHNAME=$(git branch | grep "\* hotfix") > /dev/null
           echo "filtered_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
 
       # Get the hotfix tag
@@ -63,7 +63,7 @@ jobs:
         id: get_hotfix_tag
         if: steps.is_hotfix_branch.outputs.filtered_branch_name != ''
         run: |
-          RELEASETAG=$(git branch | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
+          RELEASETAG=$(git branch | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g") > /dev/null
           echo "release_tag=$RELEASETAG" >> $GITHUB_OUTPUT
 
       # Get the last tag created on this branch
