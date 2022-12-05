@@ -54,7 +54,7 @@ jobs:
         id: is_hotfix_branch
         if: steps.is_release_branch.outputs.filtered_branch_name == ''
         run: |
-          FILTEREDBRANCHNAME=$(git branch | grep "\* hotfix") > /dev/null
+          FILTEREDBRANCHNAME=$(git branch | grep "\* hotfix")
           echo "filtered_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
 
       # Get the hotfix tag
