@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.0.26 - 2022-12-22
+## 🏗️ Build System
+- master hotfix
+
+
+
+## 2.0.26 - 2022-12-22
+## 🏗️ Build System
+- master hotfix
+
+
+
+## 2.0.25 - 2022-12-01
+## 🐛 Bugfixes
+- use last tag as commitish input
+- use last tag as commitish input
+- use last tag as commitish input
+- use last tag as last_tag input
+- draft right before publishing
+- checkout branch
+
+## 🔨 Improvements
+- support branch change
+- support branch change
+
+
+
 ## 2.0.24 - 2022-12-01
 ## 🎉 New Features
 - new test feat
