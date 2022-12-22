@@ -40,7 +40,7 @@ jobs:
         id: is_hotfix_branch
         continue-on-error: true
         run: |
-          PRBRANCH=${{ steps.payload_info.outputs.branch }}
+          PRBRANCH="${{ steps.payload_info.outputs.branch }}"
           FILTEREDBRANCHNAME=$(echo "$PRBRANCH" | grep "hotfix")
           echo "filtered_pr_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
 
@@ -48,8 +48,8 @@ jobs:
         id: get_hotfix_tag
         if: steps.is_hotfix_branch.outputs.filtered_pr_branch_name != ''
         run: |
-          HOTFIXBRANCH=${{ steps.payload_info.outputs.branch }}
-          RELEASETAG=$(echo "$HOTFIXBRANCH" | grep \* | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
+          HOTFIXBRANCH="${{ steps.payload_info.outputs.branch }}"
+          RELEASETAG=$(echo "$HOTFIXBRANCH" | sed -re "s/hotfix\///;s/\*//;s/\s*//g")
           echo "release_tag=$RELEASETAG" >> $GITHUB_OUTPUT
 
       - name: Get Last Tag created on this branch
