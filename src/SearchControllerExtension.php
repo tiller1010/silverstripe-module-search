@@ -22,6 +22,7 @@ use Page;
 /**/
 class SearchControllerExtension extends DataExtension
 {
+  // a support/1.x change
   /**/
   private static $allowed_actions = [
     "SiteSearchForm",
