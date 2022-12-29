@@ -129,17 +129,35 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
           MERGE_DELETE_BRANCH: true
+
+      - name: Post Changelog Checkout
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
+        uses: actions/checkout@master
+        with:
+          ref: master
       # END CHANGELOG PORTION
 
 
       # Merge support changes into develop so they can be included in the next release
-      - name: Merge master/support -> develop
+      - name: Merge support -> develop
+        if: steps.is_support_branch.outputs.filtered_branch_name != ''
         uses: devmasx/merge-branch@master
         with:
           type: now
           target_branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: Merged master/support into develop
+          message: Merged support into develop
+
+      # Merge master changes into develop
+      - name: Merge master -> develop
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: master
+          target_branch: develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Merged master into develop
 
       # Remove the release or hotfix branch after publishing
       - name: Remove PR branch
