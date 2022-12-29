@@ -1,35 +1,35 @@
 {
   "action": "closed",
-  "number": 62,
+  "number": 65,
   "pull_request": {
     "_links": {
       "comments": {
-        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/62/comments"
+        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/65/comments"
       },
       "commits": {
-        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/62/commits"
+        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/65/commits"
       },
       "html": {
-        "href": "https://github.com/tiller1010/silverstripe-module-search/pull/62"
+        "href": "https://github.com/tiller1010/silverstripe-module-search/pull/65"
       },
       "issue": {
-        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/62"
+        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/65"
       },
       "review_comment": {
         "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/comments{/number}"
       },
       "review_comments": {
-        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/62/comments"
+        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/65/comments"
       },
       "self": {
-        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/62"
+        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/65"
       },
       "statuses": {
-        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/statuses/65ef074acf41d643055c4201b24a117fcfeb7c1e"
+        "href": "https://api.github.com/repos/tiller1010/silverstripe-module-search/statuses/d600b23ecb6b03f3d8a70d2d31e1970645b8c3ba"
       }
     },
     "active_lock_reason": null,
-    "additions": 4,
+    "additions": 7,
     "assignee": null,
     "assignees": [],
     "author_association": "OWNER",
@@ -130,7 +130,7 @@
         },
         "private": false,
         "pulls_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls{/number}",
-        "pushed_at": "2022-12-29T19:38:27Z",
+        "pushed_at": "2022-12-29T19:47:50Z",
         "releases_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/releases{/id}",
         "size": 131,
         "squash_merge_commit_message": "COMMIT_MESSAGES",
@@ -154,7 +154,7 @@
         "watchers_count": 1,
         "web_commit_signoff_required": false
       },
-      "sha": "212f2bb1becd3587d7072e5fa3580559c080e293",
+      "sha": "b0a463dae9ea3c1696e15299f6092b97bb2280b2",
       "user": {
         "avatar_url": "https://avatars.githubusercontent.com/u/42498429?v=4",
         "events_url": "https://api.github.com/users/tiller1010/events{/privacy}",
@@ -177,19 +177,19 @@
       }
     },
     "body": "### Summary\r\n> High level summary of what was done\r\n\r\n### Testing Steps\r\n- [ ] Step 1\r\n- [ ] Step 2\r\n- [ ] Step 3\r\n- [ ] Step 4\r\n\r\n### Issues/Concerns\r\n- A concern or issue\r\n- A second concern or issue\r\n\r\n### Git Flow\r\n- **DO NOT** delete \"release/\\*\" or \"hotfix/\\*\" branches after merging a PR. These are used to publish the next release, and they are deleted automatically.\r\n- \"Squash and merge\" is good on \"feature/\\*\" into \"develop\"\r\n- \"Create a merge commit\" is good on \"release/\\*\" or \"hotfix/\\*\" into \"master\"\r\n",
-    "changed_files": 1,
-    "closed_at": "2022-12-29T19:38:27Z",
+    "changed_files": 3,
+    "closed_at": "2022-12-29T19:47:50Z",
     "comments": 0,
-    "comments_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/62/comments",
-    "commits": 1,
-    "commits_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/62/commits",
-    "created_at": "2022-12-29T19:37:49Z",
-    "deletions": 0,
-    "diff_url": "https://github.com/tiller1010/silverstripe-module-search/pull/62.diff",
+    "comments_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/65/comments",
+    "commits": 18,
+    "commits_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/65/commits",
+    "created_at": "2022-12-29T19:46:58Z",
+    "deletions": 5,
+    "diff_url": "https://github.com/tiller1010/silverstripe-module-search/pull/65.diff",
     "draft": false,
     "head": {
-      "label": "tiller1010:hotfix/2.0.26",
-      "ref": "hotfix/2.0.26",
+      "label": "tiller1010:release/2.1.0",
+      "ref": "release/2.1.0",
       "repo": {
         "allow_auto_merge": false,
         "allow_forking": true,
@@ -283,7 +283,7 @@
         },
         "private": false,
         "pulls_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls{/number}",
-        "pushed_at": "2022-12-29T19:38:27Z",
+        "pushed_at": "2022-12-29T19:47:50Z",
         "releases_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/releases{/id}",
         "size": 131,
         "squash_merge_commit_message": "COMMIT_MESSAGES",
@@ -307,7 +307,7 @@
         "watchers_count": 1,
         "web_commit_signoff_required": false
       },
-      "sha": "65ef074acf41d643055c4201b24a117fcfeb7c1e",
+      "sha": "d600b23ecb6b03f3d8a70d2d31e1970645b8c3ba",
       "user": {
         "avatar_url": "https://avatars.githubusercontent.com/u/42498429?v=4",
         "events_url": "https://api.github.com/users/tiller1010/events{/privacy}",
@@ -329,36 +329,27 @@
         "url": "https://api.github.com/users/tiller1010"
       }
     },
-    "html_url": "https://github.com/tiller1010/silverstripe-module-search/pull/62",
-    "id": 1180482368,
-    "issue_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/62",
+    "html_url": "https://github.com/tiller1010/silverstripe-module-search/pull/65",
+    "id": 1180486453,
+    "issue_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/issues/65",
     "labels": [
       {
-        "color": "d73a4a",
-        "default": true,
-        "description": "Something isn't working",
-        "id": 4353674163,
-        "name": "bug",
-        "node_id": "LA_kwDOHs28NM8AAAABA3_Lsw",
-        "url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/labels/bug"
-      },
-      {
-        "color": "446F32",
+        "color": "A62AB3",
         "default": false,
         "description": "",
-        "id": 4370065734,
-        "name": "patch",
-        "node_id": "LA_kwDOHs28NM8AAAABBHnpRg",
-        "url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/labels/patch"
+        "id": 4370067771,
+        "name": "minor",
+        "node_id": "LA_kwDOHs28NM8AAAABBHnxOw",
+        "url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/labels/minor"
       }
     ],
     "locked": false,
     "maintainer_can_modify": false,
-    "merge_commit_sha": "809a4b001729670fb34b13cb4fe161961438815c",
+    "merge_commit_sha": "8d575723ed2372af7f794c1e0d9cd10ef4c1a2d1",
     "mergeable": null,
     "mergeable_state": "unknown",
     "merged": true,
-    "merged_at": "2022-12-29T19:38:27Z",
+    "merged_at": "2022-12-29T19:47:50Z",
     "merged_by": {
       "avatar_url": "https://avatars.githubusercontent.com/u/42498429?v=4",
       "events_url": "https://api.github.com/users/tiller1010/events{/privacy}",
@@ -380,20 +371,20 @@
       "url": "https://api.github.com/users/tiller1010"
     },
     "milestone": null,
-    "node_id": "PR_kwDOHs28NM5GXLtA",
-    "number": 62,
-    "patch_url": "https://github.com/tiller1010/silverstripe-module-search/pull/62.patch",
+    "node_id": "PR_kwDOHs28NM5GXMs1",
+    "number": 65,
+    "patch_url": "https://github.com/tiller1010/silverstripe-module-search/pull/65.patch",
     "rebaseable": null,
     "requested_reviewers": [],
     "requested_teams": [],
     "review_comment_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/comments{/number}",
     "review_comments": 0,
-    "review_comments_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/62/comments",
+    "review_comments_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/65/comments",
     "state": "closed",
-    "statuses_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/statuses/65ef074acf41d643055c4201b24a117fcfeb7c1e",
-    "title": "fix: checkout master again, after changelog update",
-    "updated_at": "2022-12-29T19:38:27Z",
-    "url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/62",
+    "statuses_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/statuses/d600b23ecb6b03f3d8a70d2d31e1970645b8c3ba",
+    "title": "Release/2.1.0",
+    "updated_at": "2022-12-29T19:47:50Z",
+    "url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls/65",
     "user": {
       "avatar_url": "https://avatars.githubusercontent.com/u/42498429?v=4",
       "events_url": "https://api.github.com/users/tiller1010/events{/privacy}",
@@ -500,7 +491,7 @@
     },
     "private": false,
     "pulls_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/pulls{/number}",
-    "pushed_at": "2022-12-29T19:38:27Z",
+    "pushed_at": "2022-12-29T19:47:50Z",
     "releases_url": "https://api.github.com/repos/tiller1010/silverstripe-module-search/releases{/id}",
     "size": 131,
     "ssh_url": "git@github.com:tiller1010/silverstripe-module-search.git",

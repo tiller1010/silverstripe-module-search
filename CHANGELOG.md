@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.1.0 - 2022-12-29
+## 🎉 New Features
+- support branch change
+- some test feature
+
+## 🐛 Bugfixes
+- replaced set-output
+- replaced set-output
+- replaced set-output
+- checkout master again, after changelog update
+
+## 🏗️ Build System
+- master hotfix
+- support branch hotfix test
+
+
+
 ## 2.0.26 - 2022-12-29
 ## 🏗️ Build System
 - master hotfix
