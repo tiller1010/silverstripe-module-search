@@ -129,12 +129,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
           MERGE_DELETE_BRANCH: true
-      # END CHANGELOG PORTION
 
       - name: Post Changelog Checkout
+        if: steps.is_support_branch.outputs.filtered_branch_name == ''
         uses: actions/checkout@master
         with:
-          fetch-depth: 0
+          ref: master
+      # END CHANGELOG PORTION
+
 
       # Merge support changes into develop so they can be included in the next release
       - name: Merge master/support -> develop
