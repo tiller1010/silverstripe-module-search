@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.26 - 2022-12-29
+## 🏗️ Build System
+- master hotfix
+
+
+
 ## 2.0.26 - 2022-12-22
 ## 🏗️ Build System
 - master hotfix
