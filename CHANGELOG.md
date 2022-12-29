@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.2 - 2022-12-29
+## 🏗️ Build System
+- Checkout master instead of action trigger sha
+
+
+
 ## 2.1.1 - 2022-12-29
 ## 🏗️ Build System
 - removed redundant sync action
