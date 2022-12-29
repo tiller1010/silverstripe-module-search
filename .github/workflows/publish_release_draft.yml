@@ -131,6 +131,10 @@ jobs:
           MERGE_DELETE_BRANCH: true
       # END CHANGELOG PORTION
 
+      - name: Post Changelog Checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
 
       # Merge support changes into develop so they can be included in the next release
       - name: Merge master/support -> develop
