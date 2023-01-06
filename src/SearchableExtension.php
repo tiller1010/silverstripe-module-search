@@ -28,6 +28,9 @@ class SearchableExtension extends DataExtension
   //  SUPPORT CHANGE.
   // I WILL SQUASH THIS IN A FEATURE BRANCH
 
+  //  SUPPORT CHANGE.
+  // I WILL SQUASH THIS IN A FEATURE BRANCH
+
   /**
    * getIndexQuery
    * This query is used when building the index
