@@ -24,6 +24,8 @@ class SearchableExtension extends DataExtension
   // TEST CHANGE
   // ANOTHER TEST CHANGE
 
+  //  SUPPORT CHANGE.
+
   /**
    * getIndexQuery
    * This query is used when building the index
