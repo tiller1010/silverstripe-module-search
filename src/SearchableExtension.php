@@ -25,6 +25,7 @@ class SearchableExtension extends DataExtension
   // ANOTHER TEST CHANGE
 
   //  SUPPORT CHANGE.
+  // I WILL SQUASH THIS IN A FEATURE BRANCH
 
   /**
    * getIndexQuery
