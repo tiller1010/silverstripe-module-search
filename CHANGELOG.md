@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.5 - 2023-01-17
+## 🔨 Improvements
+- read repo name in publish
+- read repo name in publish
+
+
+
 ## 2.1.4 - 2022-12-29
 ## 🏗️ Build System
 - support branch test
