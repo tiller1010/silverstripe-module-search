@@ -35,6 +35,8 @@ class SearchableExtension extends DataExtension
   // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
   // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
 
+  // REPO UPDATE CHANGE
+
   /**
    * getIndexQuery
    * This query is used when building the index

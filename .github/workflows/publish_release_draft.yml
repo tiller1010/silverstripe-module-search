@@ -38,7 +38,7 @@ jobs:
 
       - name: Payload info
         id: payload_info
-        uses: Dovyski/payload-info-action@master
+        uses: tiller1010/payload-info-action@master
         continue-on-error: true
 
 
@@ -131,7 +131,7 @@ jobs:
 
       - name: Auto merge
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
-        uses: pascalgn/automerge-action@v0.15.3
+        uses: pascalgn/automerge-action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create_pr.outputs.pull-request-number }}
