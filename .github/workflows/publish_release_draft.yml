@@ -123,7 +123,7 @@ jobs:
 
       - name: Approve PR
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
-        uses: hmarr/auto-approve-action@v2
+        uses: hmarr/auto-approve-action@v3
         with:
           review-message: Auto approved automated PR
           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
