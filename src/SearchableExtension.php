@@ -36,6 +36,7 @@ class SearchableExtension extends DataExtension
   // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
 
   // REPO UPDATE CHANGE
+  // PAYLOAD REPO UPDATE CHANGE
 
   /**
    * getIndexQuery
