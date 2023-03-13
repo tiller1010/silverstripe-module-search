@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.6 - 2023-03-13
+## 🎉 New Features
+- squash merge support ([#76](https://github.com/tiller1010/silverstripe-module-search/pull/76) by [tiller1010](https://github.com/tiller1010))
+- use branch for notes ([#81](https://github.com/tiller1010/silverstripe-module-search/pull/81) by [tiller1010](https://github.com/tiller1010))
+
+
+
 ## 2.1.5 - 2023-01-17
 ## 🔨 Improvements
 - read repo name in publish
