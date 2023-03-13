@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.7 - 2023-03-13
+## 🎉 New Features
+- use for for new set-output
+
+
+
 ## 2.1.6 - 2023-03-13
 ## 🎉 New Features
 - squash merge support ([#76](https://github.com/tiller1010/silverstripe-module-search/pull/76) by [tiller1010](https://github.com/tiller1010))
