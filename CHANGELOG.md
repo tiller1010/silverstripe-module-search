@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.11 - 2023-03-13
+
+
+
+
 ## 2.1.10 - 2023-03-13
 ## 🎉 New Features
 - use updated repos ([#90](https://github.com/tiller1010/silverstripe-module-search/pull/90) by [tiller1010](https://github.com/tiller1010))
