@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.12 - 2023-03-13
+## 🎉 New Features
+- updated approve action
+
+
+
 ## 2.1.11 - 2023-03-13
 
 
