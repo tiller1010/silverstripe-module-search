@@ -101,7 +101,7 @@ jobs:
       - name: Generate Changelog
         id: changelog
         if: steps.is_support_branch.outputs.filtered_branch_name == ''
-        uses: loopwerk/tag-changelog@v1.0.4
+        uses: tiller1010/tag-changelog@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           exclude_types: other,doc,chore
