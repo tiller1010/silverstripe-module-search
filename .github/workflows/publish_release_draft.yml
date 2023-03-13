@@ -21,7 +21,7 @@ jobs:
 
       - name: Get repository name
         id: repo-name
-        uses: MariachiBear/get-repo-name-action@v1.1.0
+        uses: tiller1010/get-repo-name-action@master
         with:
           with-owner: 'true'
 
