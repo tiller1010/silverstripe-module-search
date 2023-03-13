@@ -32,6 +32,8 @@ class SearchableExtension extends DataExtension
   // I WILL SQUASH THIS IN A FEATURE BRANCH
 
   // CHANGE
+  // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
+  // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
 
   /**
    * getIndexQuery
