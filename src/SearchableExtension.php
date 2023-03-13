@@ -33,6 +33,7 @@ class SearchableExtension extends DataExtension
 
   // CHANGE
   // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
+  // SOME CHANGE WITH A HOTFIX CHANGELOG NOTE
 
   /**
    * getIndexQuery
