@@ -45,7 +45,7 @@ jobs:
         continue-on-error: true
         run: |
           FILTEREDBRANCHNAME=$(git branch | grep "\* support")
-          echo "filtered_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
+          echo "support_branch_name=$FILTEREDBRANCHNAME" >> $GITHUB_OUTPUT
 
 
   pre_release_redraft:
@@ -55,7 +55,7 @@ jobs:
       - name: Get release/hotfix Tag from branch name
         id: get_release_or_hotfix_tag
         run: |
-          HOTFIXBRANCH="${{ needs.pre_release_setup.steps.payload_info.outputs.branch }}"
+          HOTFIXBRANCH="${{ needs.pre_release_setup.outputs.branch }}"
           RELEASETAG=$(echo "$HOTFIXBRANCH" | sed -re "s!(\* )?(release|hotfix)/!!;s!(\w+)/.*!\1!g")
           echo "release_tag=$RELEASETAG" >> $GITHUB_OUTPUT
 
@@ -89,13 +89,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_id: ${{ needs.pre_release_setup.steps.get_release_id.outputs.release_id }}
+          release_id: ${{ needs.pre_release_setup.outputs.release_id }}
 
 
   generate_changelog:
     runs-on: ubuntu-latest
     needs: [pre_release_setup, pre_release_redraft, publish_release]
-    if: needs.pre_release_setup.steps.is_support_branch.outputs.filtered_branch_name == ''
+    if: needs.pre_release_setup.outputs.support_branch_name == ''
     steps:
       - name: Generate Changelog
         id: changelog
@@ -144,7 +144,7 @@ jobs:
     steps:
       # Merge support changes into develop so they can be included in the next release
       - name: Merge support -> develop
-        if: needs.pre_release_setup.steps.is_support_branch.outputs.filtered_branch_name != ''
+        if: needs.pre_release_setup.support_branch_name != ''
         uses: devmasx/merge-branch@master
         with:
           type: now
@@ -154,7 +154,7 @@ jobs:
 
       # Merge master changes into develop
       - name: Merge master -> develop
-        if: needs.pre_release_setup.steps.is_support_branch.outputs.filtered_branch_name == ''
+        if: needs.pre_release_setup.support_branch_name == ''
         uses: devmasx/merge-branch@master
         with:
           type: now
@@ -168,4 +168,4 @@ jobs:
         uses: dawidd6/action-delete-branch@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branches: ${{ needs.pre_release_setup.steps.payload_info.outputs.branch }}
+          branches: ${{ needs.pre_release_setup.outputs.branch }}
