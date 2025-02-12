@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.14 - 2025-02-12
+## 🐛 Bugfixes
+- added checkout step to changelog
+
+
+
 ## 2.1.12 - 2023-03-13
 ## 🎉 New Features
 - updated approve action
