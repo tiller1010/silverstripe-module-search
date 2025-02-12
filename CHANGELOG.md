@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.15 - 2025-02-12
+## 🐛 Bugfixes
+- test change for workflow files
+
+## 🔨 Improvements
+- added warning
+
+
+
 ## 2.1.14 - 2025-02-12
 ## 🐛 Bugfixes
 - added checkout step to changelog
