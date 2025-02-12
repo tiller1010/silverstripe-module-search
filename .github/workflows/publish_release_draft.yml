@@ -12,6 +12,10 @@ jobs:
   pre_release_setup:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged }}
+    outputs:
+      release_id: ${{ steps.get_release_id.outputs.release_id }}
+      pr_branch: ${{ steps.payload_info.outputs.branch }}
+      support_branch_name: ${{ steps.is_support_branch.outputs.support_branch_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -55,7 +59,7 @@ jobs:
       - name: Get release/hotfix Tag from branch name
         id: get_release_or_hotfix_tag
         run: |
-          HOTFIXBRANCH="${{ needs.pre_release_setup.outputs.branch }}"
+          HOTFIXBRANCH="${{ needs.pre_release_setup.outputs.pr_branch }}"
           RELEASETAG=$(echo "$HOTFIXBRANCH" | sed -re "s!(\* )?(release|hotfix)/!!;s!(\w+)/.*!\1!g")
           echo "release_tag=$RELEASETAG" >> $GITHUB_OUTPUT
 
@@ -168,4 +172,4 @@ jobs:
         uses: dawidd6/action-delete-branch@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branches: ${{ needs.pre_release_setup.outputs.branch }}
+          branches: ${{ needs.pre_release_setup.outputs.pr_branch }}
